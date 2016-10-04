@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Untitled Document</title>
+</head>
+
+<body>
+<script type="text/javascript">
+    var total=0;
+    var average;
+    var loopCount = 3;
+    
+    for(var count = 0; count < loopCount; count++){
+        total += parseInt(prompt("Enter number", ""));
+    }
+    
+    average = total / loopCount;
+    
+    document.write("The total was " + total + "<br/>");
+    document.write("The average is " + average);
+    
+    </script>
+</body>
+</html>

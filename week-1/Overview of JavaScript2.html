@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- JavaScript code is typically event driven, that is, it will not execute until-->
+    <!-- the user performs some action-->
+    <script>
+
+
+        function add() {
+            var num1 = parseInt(document.getElementById('txt1').value);
+            var num2 = parseInt(document.getElementById('txt2').value);
+            var num3 = parseInt(document.getElementById('txt3').value);
+
+            alert(num1 + num2 + num3);
+        }
+        function subtract() {
+            var num1 = parseInt(document.getElementById('txt1').value);
+            var num2 = parseInt(document.getElementById('txt2').value);
+            var num3 = parseInt(document.getElementById('txt3').value);
+
+           alert(num1 - num2 - num3);
+        }
+
+    </script>
+</head>
+<body>
+
+</body>
+<!--In order for JavaScript to access the textbox, we need to give it a unique id attribute -->
+<input type="text" id="txt1"/>
+<br/>
+<input type="text" id="txt2"/>
+<br/>
+<input type="text" id="txt3"/>
+<br/>
+<!-- Create a button with teh value 'add'. When the button is clicked, the browser will look for a function called addNumbers()-->
+<!-- and will execute it if the function exists. That is, the code will only be called when the button's click event-->
+<!-- has been activated-->
+<input type="button" value="add" onclick="add()"/>
+<input type="button" value="subtract" onclick="subtract()"/>
+</html>

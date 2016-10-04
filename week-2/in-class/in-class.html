@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <!-- JavaScript code is typically event driven, that is, it will not execute until-->
+    <!-- the user performs some action-->
+    <!-- Instead of putting JavaScript in our HTML page, we can reference it from another file or files -->
+    <script src="script.js">
+        
+    </script>
+    </head>
+    <body>
+</body>
+    <!--In order for JavaScript to access the textbox, we need to give it a unique id attribute -->
+    <input type="text" id="txt1" />
+    <br/>
+    <input type="text" id="txt2" />
+    <br/>
+
+    <!-- Create a button with the value 'add'. When the button is clicked, the browser will look for a function called addNumbers()-->
+    <!-- and will execute it if the function exists. That is, the code will only be called when the button's click event-->
+    <!-- has been activated-->
+    <input type="button" value="+" onClick="add()" />
+    <input type="button" value="-" onClick="subtract()" />
+    <input type="button" value="*" onClick="multiply()" />
+    <input type="button" value="/" onClick="divide()" />
+    <br/>
+    <br/>
+    <label>Answer:</label>
+    <input type="text" id="result" />
+</html>

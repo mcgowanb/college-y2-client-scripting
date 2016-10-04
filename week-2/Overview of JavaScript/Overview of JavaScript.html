@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    
+<head>
+   <!-- We place our JavaScript in a html file, or we can reference it from a html file-->
+<!-- We use the <script> element to tell the browser to treat our code as JavaScript-->
+    <script>
+        //This is how we write documentation in JavaScript
+        //Our code will execute from start to finish as this program has no functions,
+        //though JavaScript is normally heavily reliant on functions
+        
+        //We use var to declare variables
+        var x=0;
+        var y=0;
+        var yourName="";
+        
+        //When we take in input from the user, it will be treated as a string 
+        //by default -if we want to treat it as numeric data, we call appropriate built in
+        //JavaScript functions
+        
+        //propmt() is a basic method for getting input
+        yourName = prompt("What is your Name", "");
+        
+        //alert() is used to display information
+        alert("Hello " + yourName);
+        
+        //parseInt is used to convert input to an integer
+        x = parseInt(prompt("Enter an integer", ""));
+        
+        //parseFloat is used to convert input to floating point
+        y = parseFloat(prompt("Enter decimal number, "));
+        
+        alert("x is " + x + " and y is " + y);
+        
+        //We can also write directly to the browser window, but it is generally
+        //not recommended
+        document.write("The total is: " + (x + y));
+    </script>
+</head>
+<body>
+ 
+</body>
+</html>

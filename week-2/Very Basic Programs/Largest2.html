@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Largest of 2 Nums</title>
+</head>
+
+<body>
+<script>
+var number1=0;
+var number2=0;
+var number3=0;
+
+number1=parseInt(prompt("Enter a number", ""));
+number2=parseInt(prompt("Enter a number", ""));
+number3=parseInt(prompt("Enter a number", ""));
+
+if((number1>number2) && (number1>number3))
+{
+	document.write("Largest is var1: " + number1);
+}
+else if((number2>number1) && (number2>number3))
+{
+	document.write("Largest is var2 " + number2);
+}
+else 	document.write("Largest is var3 " + number3);
+
+</script>
+</body>
+</html>

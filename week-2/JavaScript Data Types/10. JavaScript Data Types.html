@@ -1,0 +1,65 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Untitled Document</title>
+
+<script>
+//Demo of JavaScript data types
+//Data types available to us in JavaScript are:
+//Undefined
+//Number
+//Boolean
+//String
+//Array
+//Null
+//Object
+var a;
+var b = 3;
+var c = true;
+var d = "true";
+var e = [23, 24, 25];
+var f = null;
+var g = {name: "john", address: "main st. sligo", age: 23};
+
+document.write("Our data types are: <br/>");
+//a has nothing in it so it undefined
+document.write(typeof(a) + "<br/>");
+//b contains a number so is the data type number
+document.write(typeof(b) + "<br/>");
+//c contains a boolean value so is a Boolean data type
+document.write(typeof(c) + "<br/>");
+//d does not contain a boolean value but rather a string
+document.write(typeof(d) + "<br/>");
+//e is an array, and can be processed as in C#, but the actual data type is an object
+//an array is a special type of object in JavaScript
+document.write(typeof(e) + "<br/>");
+//f is of data type null, however the typeof operator will report it as being an
+//object - this is for backwards compatability and not overly relevant at the moment
+document.write(typeof(f) + "<br/>");
+//g is an object
+document.write(typeof(g) + "<br/>");
+
+document.write("<br/> Our actual data is:<br/>");
+document.write(a + "<br/>");
+document.write(b + "<br/>");
+document.write(c + "<br/>");
+document.write(d + "<br/>");
+document.write(e[0] + " " + e[1] + " " + e[2] + "<br/>");
+document.write(f + "<br/>");
+document.write(g.name + "<br/>");
+document.write(g.address + "<br/>");
+document.write(g.age + "<br/>");
+
+//You'll get more information here:
+//http://www.w3schools.com/js/js_datatypes.asp
+
+//and here:
+//http://msdn.microsoft.com/en-us/library/ie/7wkd9z69(v=vs.94).aspx
+
+</script>
+</head>
+
+<body>
+</body>
+</html>
