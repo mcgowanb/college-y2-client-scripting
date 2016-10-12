@@ -76,10 +76,16 @@ function changeBackgroundColor() {
 }
 
 //8. When the 'Lorum ipsum dolor' header is clicked, make 3 style changes to the paragraph just below it. Also append a new paragraph to the header (with text 'New Paragraph, font size 72).
-function changeParagraph(){
+function changeParagraph() {
     var paragraph = document.getElementById('p1');
     paragraph.style.fontSize = "24px";
     paragraph.style.fontStyle = "italic";
     paragraph.style.color = "green";
+
+    var newPara = document.createElement('p');
+    newPara.innerHTML = "New Paragraph";
+    newPara.style.fontSize = "72px";
+    var header = document.getElementById("head-1");
+    header.appendChild(newPara);
 }
 
