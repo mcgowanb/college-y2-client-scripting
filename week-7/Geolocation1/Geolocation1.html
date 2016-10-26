@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Simple markers</title>
+    <!-- Basic styling-->
+    <style>
+        html, body, #map-canvas {
+            height: 100%;
+            margin: 0px;
+            padding: 0px
+        }
+    </style>
+     <!--We need to use the Google maps API - you'll get information on this from Google-->
+    <script src="https://maps.googleapis.com/maps/api/js?v=3"></script>
+    <script>
+        function initialize() {
+            //Set the lat and long coords
+            var myLatlng = new google.maps.LatLng(54.234, -8.5375);
+            //mapOptions is an object - we set the zoom value and centre the map on the above
+            //coords
+            var mapOptions = {
+                zoom: 10,
+                center: myLatlng
+            }
+            //Create a new map on map-canvas
+            var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+            //Create a marker
+            var marker = new google.maps.Marker({
+                position: myLatlng,
+                map: map,
+                title: 'Hello World!'
+            });
+        }
+        //When the page(window) loads, call the function initialize
+        google.maps.event.addDomListener(window, 'load', initialize);
+
+    </script>
+</head>
+<body>
+<div id="map-canvas"></div>
+</body>
+</html>
