@@ -22,9 +22,9 @@ function removeAndReplace(image) {
 //Q3
 function rotateImage() {
     var img = document.getElementById("image-2");
-    if(img != null){
-    img.style.transform = "rotate(15deg)";
-    img.style.border = "dashed blue 5px"
+    if (img != null) {
+        img.style.transform = "rotate(15deg)";
+        img.style.border = "dashed blue 5px"
     }
 }
 
@@ -64,7 +64,8 @@ function synergise() {
 //Q7
 function makeRandomChanges() {
     var menuIcon = document.getElementById("menu");
-    menuIcon.parentNode.removeChild(menuIcon);
+    if (menuIcon != null)
+        menuIcon.parentNode.removeChild(menuIcon);
 
     var searchBox = document.getElementById("search");
     searchBox.setAttribute("value", "Default Text");
@@ -72,12 +73,15 @@ function makeRandomChanges() {
     var body = document.getElementById("body");
     body.setAttribute("style", "width: 80%; margin: 0 auto; border: 1px solid grey;");
 
+    body.style.font = "Arial";
+
     var titles = document.getElementsByClassName("mText");
-    for(var i = 0; i < titles.length; i++){
+    for (var i = 0; i < titles.length; i++) {
         titles[i].setAttribute("style", reverseStyle);
     }
 
-
+    var navBar = document.getElementById("mainNavBar");
+    navBar.setAttribute("style", "width:80%; margin: 0 auto;")
 
 }
 
