@@ -1,5 +1,6 @@
 // JavaScript Document
 "use strict";
+var reverseStyle = "-webkit-transform:rotateY(180deg); -moz-transform:rotateY(180deg);-o-transform:rotateY(180deg);-ms-transform:rotateY(180deg);transform:rotateY(180deg);";
 //Q1
 function changeImage(image) {
     image.src = "seaside-001.jpg"
@@ -21,8 +22,10 @@ function removeAndReplace(image) {
 //Q3
 function rotateImage() {
     var img = document.getElementById("image-2");
+    if(img != null){
     img.style.transform = "rotate(15deg)";
     img.style.border = "dashed blue 5px"
+    }
 }
 
 //Q4
@@ -53,7 +56,6 @@ function synergise() {
     var glyph = document.getElementById("synergise-span");
     glyph.setAttribute("class", "glyphicon glyphicon-trash");
     var text = glyph.parentNode;
-    var reverseStyle = "-webkit-transform:rotateY(180deg); -moz-transform:rotateY(180deg);-o-transform:rotateY(180deg);-ms-transform:rotateY(180deg);transform:rotateY(180deg);";
     text.setAttribute("style", reverseStyle);
     var nText = document.getElementById("synergise-p");
     nText.setAttribute("style", reverseStyle);
@@ -69,6 +71,11 @@ function makeRandomChanges() {
 
     var body = document.getElementById("body");
     body.setAttribute("style", "width: 80%; margin: 0 auto; border: 1px solid grey;");
+
+    var titles = document.getElementsByClassName("mText");
+    for(var i = 0; i < titles.length; i++){
+        titles[i].setAttribute("style", reverseStyle);
+    }
 
 
 
