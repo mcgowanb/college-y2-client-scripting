@@ -1,20 +1,24 @@
 <!doctype html>
 <html>
 <head>
-<meta charset="utf-8">
-<title>Two Functions for one Event</title>
+    <meta charset="utf-8">
+    <title>Two Functions for one Event</title>
 
 </head>
 
 <body>
-<input type="button" value="Click Me" id="btn1" />
+<input type="button" value="Click Me" id="btn1"/>
 <script>
-//Same problem, different context.
-//The second property of onclick overrides the first one.
-//I also have to put the script, below the HTML - why?
-var elem = document.getElementById('btn1');
-elem.onclick = function () { alert('I am function 1'); };
-elem.onclick = function () { alert('I am function 2'); };
+    //Same problem, different context.
+    //The second property of onclick overrides the first one.
+    //I also have to put the script, below the HTML - why?
+    var elem = document.getElementById('btn1');
+    elem.onclick = function () {
+        alert('I am function 1');
+    };
+    elem.onclick = function () {
+        alert('I am function 2');
+    };
 </script>
 </body>
 </html>
