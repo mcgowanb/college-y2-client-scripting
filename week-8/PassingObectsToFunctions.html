@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Passing by Reference and value</title>
+<script>
+//DON'T EXPECT TO GET EXAMINED ON THIS - MAY BE USEFUL FOR NEXT ASSIGNMENT
+//IF CODE IS NOT WORKING AS YOU WOULD HAVE EXPECTED
+function createandpass()
+{
+	//Create a number data type
+	var x = 23;
+	//Create a string data type
+	var y = "Hello";
+	//Create an Array
+	var z = [23, 24, 25];
+	//Call the function to try and change above values
+	trychange(x, y, z);
+	//x will not change as it is a number data type
+	document.write(x + " " + typeof(x) + "<br/>");
+	//y will not change as it is a string data type
+	document.write(y + " " + typeof(y) + "<br/>");
+	//z will change as even though it is an array, an array is a special type of object
+	//and while objects are still passed by value, the value which is passed is not the object itself, but
+	//rather a pointer(reference) to the object
+	document.write(typeof(z) + " ");
+	for (var i = 0; i<z.length; i++)
+	{
+		document.write(z[i] + " ");
+	}
+}
+
+function trychange(num1, str1, arr1)
+{
+	//Try and change the values passed down
+	num1 = 156;
+	str1 = "Goodbye";
+	arr1[0] = -10;
+	arr1[1] = 150;
+	arr1[2] = 200;
+	//return
+	return;
+}
+</script>
+</head>
+
+<body onload="createandpass()">
+</body>
+</html>

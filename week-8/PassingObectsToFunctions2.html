@@ -1,0 +1,63 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Passing by Reference and value</title>
+<script>
+//DON'T EXPECT TO GET EXAMINED ON THIS - MAY BE USEFUL FOR NEXT ASSIGNMENT
+//IF CODE IS NOT WORKING AS YOU WOULD HAVE EXPECTED
+function createandpass()
+{
+	//Create a number data type
+	var a = 23;
+	//Create a string data type
+	var b = "Hello";
+	//Create an Array
+	var c = [23, 24, 25];
+	//Create a null;
+	var d = null;
+	//create an undefined
+	var e = undefined;
+	//create a Boolean
+	var f = true;
+	//Create a String Object (effectively a string)
+	var g = new String("New String");
+	//Create an Object and assign a string value
+	var h = new Object({str1:"New String"});
+	//Call the function to try and change above values
+	trychange(a, b, c, d, e, f, g, h);
+	//null will display as an object data type (indicating that variable d should change) but the listing of object is for 
+	//backwards compatibility - it is a simple (null) data type so will not change
+	//g will not change either as we have created a string object
+	var out = document.getElementById('output');
+	out.innerHTML=typeof(a) + ": " + a + "<br/>" + typeof(b) + ": " + b + "<br/>" + typeof(c) + " " + c[0] + " " + c[1] + " " + c[2] + "<br/>"
+	+ typeof(d) + ": " + d + "<br/>" + typeof(e) + ": " + e + "<br/>" + typeof(f) + ": " + f + "<br/>" + typeof(g) + ": " + g + "<br/>" + typeof(h) + ": " + h.str1;
+}
+
+function trychange(num1, str1, arr1, null1, undef1, bool1, str1, obj1)
+{
+	//Try and change the values passed down
+	num1 = 156;
+	str1 = "Goodbye";
+	//The array values WILL change as an Array is a type of object so a reference has been passed down
+	arr1[0] = -10;
+	arr1[1] = 150;
+	arr1[2] = 200;
+	null1="Hi!";
+	undef1=null;
+	bool1=false;
+	//The string has been passed down as a string data type, not an object
+	//therefore will not be altered
+	alert(typeof(str1));
+	str1="String Altered Twice";
+	//Now we are able to change the string value.
+	obj1.str1="Hello World";
+	return;
+}
+</script>
+</head>
+
+<body onload="createandpass()">
+<label id="output"></label>
+</body>
+</html>
