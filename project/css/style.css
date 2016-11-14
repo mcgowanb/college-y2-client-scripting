@@ -184,6 +184,7 @@ nav {
     letter-spacing: -2px;
     text-shadow: 0px -1px 0px #000;
     color: #FFF;
+    line-height: 2;
 }
 
 ul#nav {
@@ -198,6 +199,9 @@ ul#nav li {
     background: transparent;
 }
 
+ul#nav li a:not(.btn) {
+
+}
 ul#nav li a {
     float: left;
     font: bold 130% 'PacificoRegular', Arial, sans-serif;
@@ -239,6 +243,7 @@ ul#nav li:hover a {
     -webkit-box-shadow: rgba(0, 0, 0, 0.5) 0px 0px 5px;
     -moz-box-shadow: rgba(0, 0, 0, 0.5) 0px 0px 5px;
     box-shadow: rgba(0, 0, 0, 0.5) 0px 0px 5px;
+    background-color: #FFFFFF;
 }
 
 .sidebar_container {
@@ -280,6 +285,7 @@ ul#nav li:hover a {
 
 .content_item {
     width: 680px;
+    /*margin: 20px 5px;*/
     margin-top: 20px;
     margin-bottom: 20px;
 }
@@ -289,6 +295,9 @@ ul#nav li:hover a {
     padding: 5px;
     margin: 20px 0 0 0;
     float: left;
+}
+p {
+    padding-right: 5px;
 }
 
 .content_image {
@@ -430,12 +439,16 @@ footer a:hover {
     color: #FFF;
 }
 
+.slideshow img{
+    border-radius:15px
+}
 .slideshow {
     width: 680px;
     height: 250px;
     margin-top:20px;
+    border-radius: 15px;
     margin-left: 20px;
-    -webkit-box-shadow: rgba(0, 0, 0, 0.5) 0px 0px 10px;
-    -moz-box-shadow: rgba(0, 0, 0, 0.5) 0px 0px 10px;
-    box-shadow: rgba(0, 0, 0, 0.5) 0px 0px 10px;
+    /*-webkit-box-shadow: rgba(0, 0, 0, 0.5) 0px 0px 10px;*/
+    /*-moz-box-shadow: rgba(0, 0, 0, 0.5) 0px 0px 10px;*/
+    /*box-shadow: rgba(0, 0, 0, 0.5) 0px 0px 10px;*/
 }
