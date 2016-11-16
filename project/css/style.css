@@ -199,9 +199,7 @@ ul#nav li {
     background: transparent;
 }
 
-ul#nav li a:not(.btn) {
 
-}
 ul#nav li a {
     float: left;
     font: bold 130% 'PacificoRegular', Arial, sans-serif;

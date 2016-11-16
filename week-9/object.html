@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script>
+    var hotel = {
+        name: "Quay",
+        rooms: 35,
+        booked: 20,
+        gym: false,
+        roomTypes: ["Single", "Double", "Suite"],
+        checkAvailability: function () {
+            return this.rooms - this.booked
+        }
+    }
+
+    function hasGym(){
+
+        if(hotel.gym) alert("Yes, this hotel has a gym");
+        else alert("No, this place does not have a gym");
+    }
+
+    function checkRooms() {
+        var roomsAvailable = hotel.checkAvailability();
+        if (roomsAvailable > 0)
+            alert("There are " + roomsAvailable + " rooms available");
+        else alert("There are no rooms free");
+    }
+
+    function bookRooms() {
+        var number = parseInt(document.getElementById("number").value);
+        if (hotel.checkAvailability() < number)
+            alert("unable to book " + number + " rooms as only " + hotel.checkAvailability() + " available");
+        else{
+            hotel.booked += number;
+            alert(number + " rooms booked");
+        }
+    }
+</script>
+<body>
+<input type="button" value="Check Rooms" onclick="checkRooms()"/><br />
+<label> No Of rooms to book</label><input type="number" step="1" id="number" /><br />
+<input type="button" value="Book Rooms" onclick="bookRooms()"/><br />
+<input type="button" value="Has this hotel a gym" onclick="hasGym()"/>
+</body>
+</html>

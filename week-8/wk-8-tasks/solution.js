@@ -16,7 +16,7 @@ function addEventListeners() {
 }
 
 //createDiv was originally called from the body load, but if we call it from within our JS file it will execute immediately.
-createDiv();    
+createDiv();
 //1. 25 Marks
 //When the body has finished loading call a function such that for ALL paragraphs on the page:
 //- A new <div> is created for each paragraph

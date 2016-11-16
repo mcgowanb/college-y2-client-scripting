@@ -23,14 +23,21 @@ function partA() {
     changeButtonStyles();
     changeHeader();
     movePageContent();
+    changeColours();
 }
 
-function movePageContent(){
+
+function changeColours() {
+    document.getElementById("strapline").setAttribute("style", "background: -webkit-linear-gradient(#F7B731, #676767); border-radius:0");
+    document.querySelector("#menubar").setAttribute("style", "background: -webkit-linear-gradient(#F7B731, #676767); border-radius:0");
+    document.getElementById("footer").setAttribute("style", "background: -webkit-linear-gradient(#F7B731, #676767); border-radius:0");
+    document.querySelector("#welcome span").style.color = "#fff";
+    // document.querySelector("#welcome h3").setAttribute("style", "text-shadow: 11px 3px 5px rgba(0, 0, 0, 1);");
+}
+function movePageContent() {
     document.getElementById("sidebar").style.float = "left";
     document.getElementById("content").style.float = "right";
     document.getElementById("slideshow").setAttribute("style", "float:right; margin-left:0; margin-right:20px");
-    document.getElementById("strapline").setAttribute("style", "background: -webkit-linear-gradient(#F7B731, #676767); border-radius:0");
-    document.getElementById("footer").setAttribute("style", "background: -webkit-linear-gradient(#F7B731, #676767); border-radius:0");
 }
 
 
@@ -40,6 +47,7 @@ function changeHeader() {
 }
 
 function changeButtonStyles() {
+    //in here change class for pseudo selectors
     var actualButtons = document.querySelectorAll(".read-more");
     for (var i = 0; i < actualButtons.length; i++) {
         actualButtons[i].parentNode.className = "basic";
@@ -51,6 +59,9 @@ function changeButtonStyles() {
     for (var i = 0; i < menuButtons.length; i++) {
         menuButtons[i].style.fontFamily = "Bevan,cursive";
         menuButtons[i].style.paddingTop = "7px";
+        // var pn = menuButtons[i].parentNode;
+        // pn.setAttribute("class", "new-current");
+
     }
 }
 
@@ -64,6 +75,10 @@ function changeFontTypeForElements(item) {
     document.getElementsByTagName('p');
     for (var i = 0; i < headers.length; i++) {
         headers[i].style.fontFamily = "Bevan,cursive";
+        if(item == "h3"){
+            //targetting too many here
+            headers[i].setAttribute("style", "text-shadow: 11px 6px 5px rgba(0, 0, 0, 1); font-family:Bevan, cursive")
+        }
     }
 }
 
@@ -95,11 +110,15 @@ function fadeIn(id, val) {
     }
 }
 
-function fadeOut(id,val){
-    if(isNaN(val)){ val = 9;}
-    document.getElementById(id).style.opacity='0.'+val;
-    if(val>0){
+function fadeOut(id, val) {
+    if (isNaN(val)) {
+        val = 9;
+    }
+    document.getElementById(id).style.opacity = '0.' + val;
+    if (val > 0) {
         val--;
-        setTimeout('fadeOut("'+id+'",'+val+')',50);
-    }else{return;}
+        setTimeout('fadeOut("' + id + '",' + val + ')', 50);
+    } else {
+        return;
+    }
 }
