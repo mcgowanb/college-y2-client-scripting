@@ -68,10 +68,6 @@ function changeFontTypeForElements(item) {
     for (var i = 0; i < headers.length; i++) {
         headers[i].style.fontFamily = "Bevan,cursive";
         if (item == "h3") {
-<<<<<<< HEAD
-=======
-            //targetting too many here
->>>>>>> refs/remotes/origin/master
             headers[i].setAttribute("style", "text-shadow: 11px 6px 5px rgba(0, 0, 0, 1); font-family:Bevan, cursive")
         }
     }
@@ -104,8 +100,6 @@ function fadeIn(id, val) {
     } else {
         return;
     }
-<<<<<<< HEAD
-=======
 }
 
 function fadeOut(id, val) {
@@ -136,5 +130,4 @@ function fadeOut(id, val) {
         row.appendChild(element);
         document.getElementById("body").appendChild(row);
     }
->>>>>>> refs/remotes/origin/master
 }
