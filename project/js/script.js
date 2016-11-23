@@ -68,6 +68,10 @@ function changeFontTypeForElements(item) {
     for (var i = 0; i < headers.length; i++) {
         headers[i].style.fontFamily = "Bevan,cursive";
         if (item == "h3") {
+<<<<<<< HEAD
+=======
+            //targetting too many here
+>>>>>>> refs/remotes/origin/master
             headers[i].setAttribute("style", "text-shadow: 11px 6px 5px rgba(0, 0, 0, 1); font-family:Bevan, cursive")
         }
     }
@@ -76,6 +80,8 @@ function changeFontTypeForElements(item) {
 function partB() {
     document.getElementById("part-a").className = "";
     document.getElementById("part-b").className = "current";
+    fadeOut("main");
+    createPartBContent();
 }
 
 function changeSliderImages() {
@@ -98,4 +104,37 @@ function fadeIn(id, val) {
     } else {
         return;
     }
+<<<<<<< HEAD
+=======
+}
+
+function fadeOut(id, val) {
+    if (isNaN(val)) {
+        val = 9;
+    }
+    var main = document.getElementById(id);
+    main.style.opacity = '0.' + val;
+    if (val > 0) {
+        val--;
+        setTimeout('fadeOut("' + id + '",' + val + ')', 50);
+    } else if (val === 0) {
+        main.parentNode.removeChild(main);
+    }
+
+    else {
+        return;
+
+    }
+
+    function createPartBContent() {
+        var row = document.createElement("div");
+        row.class = "row";
+
+        var element = document.createElement("div");
+        element.class = "col-xs-12";
+
+        row.appendChild(element);
+        document.getElementById("body").appendChild(row);
+    }
+>>>>>>> refs/remotes/origin/master
 }
