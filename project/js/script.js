@@ -75,7 +75,7 @@ function changeFontTypeForElements(item) {
     document.getElementsByTagName('p');
     for (var i = 0; i < headers.length; i++) {
         headers[i].style.fontFamily = "Bevan,cursive";
-        if(item == "h3"){
+        if (item == "h3") {
             //targetting too many here
             headers[i].setAttribute("style", "text-shadow: 11px 6px 5px rgba(0, 0, 0, 1); font-family:Bevan, cursive")
         }
@@ -85,13 +85,14 @@ function changeFontTypeForElements(item) {
 function partB() {
     document.getElementById("part-a").className = "";
     document.getElementById("part-b").className = "current";
+    fadeOut("main");
+    createPartBContent();
 }
 
 function changeSliderImages() {
     var img = document.getElementById("slider");
     img.style.opacity = '0.0';
     img.style.borderRadius = "0";
-    // fadeOut("slider");
     img.setAttribute("src", "images/slider-" + imageCounter + ".jpg");
     fadeIn("slider");
     imageCounter++;
@@ -114,11 +115,28 @@ function fadeOut(id, val) {
     if (isNaN(val)) {
         val = 9;
     }
-    document.getElementById(id).style.opacity = '0.' + val;
+    var main = document.getElementById(id);
+    main.style.opacity = '0.' + val;
     if (val > 0) {
         val--;
         setTimeout('fadeOut("' + id + '",' + val + ')', 50);
-    } else {
+    } else if (val === 0) {
+        main.parentNode.removeChild(main);
+    }
+
+    else {
         return;
+
+    }
+
+    function createPartBContent() {
+        var row = document.createElement("div");
+        row.class = "row";
+
+        var element = document.createElement("div");
+        element.class = "col-xs-12";
+
+        row.appendChild(element);
+        document.getElementById("body").appendChild(row);
     }
 }
