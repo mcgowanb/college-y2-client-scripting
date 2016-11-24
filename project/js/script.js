@@ -115,33 +115,61 @@ function fadeOut(id, val) {
 }
 
 function createPartBContent() {
+    var row1 = document.createElement("div");
+    row1.setAttribute("class", "row");
+
+    var elementCOl = document.createElement("div");
+    elementCOl.setAttribute("class", "col-xs-10 col-xs-offset-2");
+    var btn = document.createElement("button");
+    btn.setAttribute("class", "btn btn-lg btn-default");
+    btn.setAttribute("id", "add-route");
+    btn.innerHTML = "do something";
+
+    elementCOl.appendChild(btn);
+    row1.appendChild(elementCOl);
+
     var row = document.createElement("div");
     row.setAttribute("class", "row");
 
     var element = document.createElement("div");
-    element.setAttribute("class","col-xs-8 col-xs-offset-2");
-    element.setAttribute("id","map");
+    element.setAttribute("class", "col-xs-4 col-xs-offset-2");
+    element.setAttribute("id", "map");
+
+    var element2 = document.createElement("div");
+    element2.setAttribute("class", "col-xs-4");
+    element2.setAttribute("id", "panel");
 
     row.appendChild(element);
-    document.getElementById("body").appendChild(row);
+    row.appendChild(element2);
+    document.getElementById("body").appendChild(row1).appendChild(row);
     initMap();
 }
 function initMap() {
+    var directionsService = new google.maps.DirectionsService();
+    var directionsDisplay = new google.maps.DirectionsRenderer();
 
+    var pointA = new google.maps.LatLng(54.267806, -8.459823);
+    // var pointB = new google.maps.LatLng(50.8429, -0.1313);
+    var pointB = new google.maps.LatLng(53.3493, -6.2607);
 
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showPosition);
-    } else {
-        alert("Geolocation is not supported by this browser.");
-    }
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showPosition);
-    }
+    // if (navigator.geolocation) {
+    //     navigator.geolocation.getCurrentPosition(showPosition);
+    // } else {
+    //     alert("Geolocation is not supported by this browser.");
+    // }
+    // if (navigator.geolocation) {
+    //     navigator.geolocation.getCurrentPosition(showPosition);
+    //
+    // }
     map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 8
+        zoom: 8,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
 
     });
+    directionsDisplay.setMap(map);
+    directionsDisplay.setPanel(document.getElementById('panel'));
 
+    calculateAndDisplayRoute(directionsService, directionsDisplay, pointA, pointB);
 }
 
 function showPosition(position) {
@@ -151,5 +179,19 @@ function showPosition(position) {
     var marker = new google.maps.Marker({
         position: new google.maps.LatLng(lat, lng),
         map: map
+    });
+}
+
+function calculateAndDisplayRoute(directionsService, directionsDisplay, pointA, pointB) {
+    directionsService.route({
+        origin: pointA,
+        destination: pointB,
+        travelMode: google.maps.TravelMode.DRIVING
+    }, function (response, status) {
+        if (status == google.maps.DirectionsStatus.OK) {
+            directionsDisplay.setDirections(response);
+        } else {
+            window.alert('Directions request failed due to ' + status);
+        }
     });
 }
