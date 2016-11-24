@@ -97,8 +97,6 @@ function fadeIn(id, val) {
     if (val < 9) {
         val++;
         setTimeout('fadeIn("' + id + '",' + val + ')', 90);
-    } else {
-        return;
     }
 }
 
@@ -114,20 +112,44 @@ function fadeOut(id, val) {
     } else if (val === 0) {
         main.parentNode.removeChild(main);
     }
+}
 
-    else {
-        return;
+function createPartBContent() {
+    var row = document.createElement("div");
+    row.setAttribute("class", "row");
 
+    var element = document.createElement("div");
+    element.setAttribute("class","col-xs-8 col-xs-offset-2");
+    element.setAttribute("id","map");
+
+    row.appendChild(element);
+    document.getElementById("body").appendChild(row);
+    initMap();
+}
+function initMap() {
+
+
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+    } else {
+        alert("Geolocation is not supported by this browser.");
     }
-
-    function createPartBContent() {
-        var row = document.createElement("div");
-        row.class = "row";
-
-        var element = document.createElement("div");
-        element.class = "col-xs-12";
-
-        row.appendChild(element);
-        document.getElementById("body").appendChild(row);
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
     }
+    map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 8
+
+    });
+
+}
+
+function showPosition(position) {
+    var lat = position.coords.latitude;
+    var lng = position.coords.longitude;
+    map.setCenter(new google.maps.LatLng(lat, lng));
+    var marker = new google.maps.Marker({
+        position: new google.maps.LatLng(lat, lng),
+        map: map
+    });
 }
