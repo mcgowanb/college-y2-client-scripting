@@ -464,3 +464,8 @@ footer a:hover {
     height: 500px;
     overflow-y: scroll;
 }
+.summary{
+    font-weight: 500;
+    font-family:Bevan, cursive;
+    float: right;
+}

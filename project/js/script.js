@@ -152,7 +152,7 @@ function generateMainBodyContent() {
     btn.setAttribute("style", "float:right");
     btn.innerHTML = "Beginulate";
 
-    headerCol.innerHTML = "<h3 style='font-family:Bevan, cursive'>Welcome to the map planner. We have pre planned a route for you today. Please click the button to see where you're off to today.....</h3>";
+    headerCol.innerHTML = "<h3 style='font-family:Bevan, cursive'>Welcome to the map planner. We have pre planned a route for you today. Please click the button to see where you're off to.....</h3>";
     headerCol.appendChild(btn);
     headerRow.appendChild(headerCol);
 
@@ -167,10 +167,9 @@ function generateMainBodyContent() {
     var distanceCol = document.createElement("div");
     distanceCol.setAttribute("class", "col-xs-4");
     distanceCol.setAttribute("id", "distance");
-    
+
     resultRow.appendChild(durationCol);
     resultRow.appendChild(distanceCol);
-    
 
     var mapRow = document.createElement("div");
     mapRow.setAttribute("class", "row");
@@ -192,19 +191,14 @@ function generateMainBodyContent() {
 function initMap() {
     directionsService = new google.maps.DirectionsService();
     directionsDisplay = new google.maps.DirectionsRenderer();
-    // var lat, lng;
-    // navigator.geolocation.getCurrentPosition(function (location) {
-    //     lat = location.coords.latitude;
-    //     lng = location.coords.longitude;
-    // });
 
-    // location of it sligo
+    // location of it Sligo
     startingLocation = endLocation = new google.maps.LatLng(54.2785534, -8.4622789);
 
+    //create map
     map = new google.maps.Map(document.getElementById('map'), {
         zoom: 8,
-        mapTypeId: google.maps.MapTypeId.ROADMAP
-
+        mapTypeId: google.maps.MapTypeId.HYBRID
     });
     directionsDisplay.setMap(map);
     directionsDisplay.setPanel(document.getElementById('panel'));
@@ -237,22 +231,19 @@ function addWayPoint() {
         var totalDistance = 0;
         var totalDuration = 0;
         var legs = directionsResult.routes[0].legs;
-        for(var i=0; i<legs.length; ++i) {
+        for (var i = 0; i < legs.length; ++i) {
             totalDistance += (legs[i].distance.value) / 1000;
             totalDuration += legs[i].duration.value;
         }
-        document.getElementById("distance").innerHTML = "Total Distance:" + Math.round(totalDistance * 100) / 100 + "km (approx)";
-        document.getElementById("duration").innerHTML = "Total Time: (hh:mm) " + convertSecondsToTime(totalDuration);
-
+        document.getElementById("distance").innerHTML = "<p class='summary'>Total Distance: " + Math.round(totalDistance * 100) / 100 + "km (approx)</p>";
+        document.getElementById("duration").innerHTML = "<p class='summary'>Total Time: (hh:mm) " + convertSecondsToTime(totalDuration) + "</p>";
 
         setTimeout(addWayPoint, 1000);
     }
 
-    function convertSecondsToTime(totalSec){
-        var hours = parseInt( totalSec / 3600 ) % 24;
-        var minutes = parseInt( totalSec / 60 ) % 60;
-        var seconds = totalSec % 60;
-
+    function convertSecondsToTime(totalSec) {
+        var hours = parseInt(totalSec / 3600) % 24;
+        var minutes = parseInt(totalSec / 60) % 60;
         return (hours < 10 ? "0" + hours : hours) + ":" + (minutes < 10 ? "0" + minutes : minutes);
     }
 }
