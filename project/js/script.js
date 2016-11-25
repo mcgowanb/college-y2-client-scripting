@@ -1,12 +1,7 @@
 initListeners();
 var imageCounter = 1;
 
-var directionsService, directionsDisplay, map, waypts = [], startingLocation, endLocation;
-// var ordinatesList = [
-//     new google.maps.LatLng(54.1803, -8.4988),
-//     new google.maps.LatLng(54.0552, -8.7298),
-//     new google.maps.LatLng(53.9640, -8.7926)
-// ];
+var directionsService, directionsDisplay, directionsResult, map, waypts = [], startingLocation, endLocation;
 
 var ordinatesList = [
     new LatLng(54.1803, -8.4988),
@@ -15,13 +10,13 @@ var ordinatesList = [
     new LatLng(54.1446, -9.7429),
     new LatLng(53.9062, -9.7814),
     new LatLng(53.8021, -9.5143),
-    new LatLng(53.4891, -10.0202)
-    // {lat: 54.1803, lng: -8.4988},
-    // {lat: 54.0552, lng: -8.7298},
-    // {lat: 53.9640, lng: -8.7926}
+    new LatLng(53.4891, -10.0202),
+    new LatLng(53.2707, -9.0568),
+    new LatLng(53.4239, -7.9407),
+    new LatLng(53.5259, -7.3381)
 ];
 
-function LatLng(lat, lng){
+function LatLng(lat, lng) {
     this.lat = lat;
     this.lng = lng;
 }
@@ -154,11 +149,28 @@ function generateMainBodyContent() {
     var btn = document.createElement("button");
     btn.setAttribute("class", "btn btn-xs btn-primary");
     btn.setAttribute("id", "add-route");
-    btn.innerHTML = "Continue";
+    btn.setAttribute("style", "float:right");
+    btn.innerHTML = "Beginulate";
 
-    headerCol.innerHTML = "<h3 style='font-family:Bevan, cursive'>Welcome to the map planner. We have pre planned a route for you today. Please click continue to generate your route</h3>";
+    headerCol.innerHTML = "<h3 style='font-family:Bevan, cursive'>Welcome to the map planner. We have pre planned a route for you today. Please click the button to see where you're off to today.....</h3>";
     headerCol.appendChild(btn);
     headerRow.appendChild(headerCol);
+
+    var resultRow = document.createElement("div");
+    resultRow.setAttribute("class", "row");
+    resultRow.setAttribute("style", "margin-top: 20px");
+
+    var durationCol = document.createElement("div");
+    durationCol.setAttribute("class", "col-xs-4 col-xs-offset-2");
+    durationCol.setAttribute("id", "duration");
+
+    var distanceCol = document.createElement("div");
+    distanceCol.setAttribute("class", "col-xs-4");
+    distanceCol.setAttribute("id", "distance");
+    
+    resultRow.appendChild(durationCol);
+    resultRow.appendChild(distanceCol);
+    
 
     var mapRow = document.createElement("div");
     mapRow.setAttribute("class", "row");
@@ -173,18 +185,18 @@ function generateMainBodyContent() {
 
     mapRow.appendChild(mapDiv);
     mapRow.appendChild(directionsDiv);
-    document.getElementById("body").appendChild(headerRow).appendChild(mapRow);
+    document.getElementById("body").appendChild(headerRow).appendChild(resultRow).appendChild(mapRow);
 
     document.getElementById("add-route").addEventListener("click", addWayPoint, false);
 }
 function initMap() {
     directionsService = new google.maps.DirectionsService();
     directionsDisplay = new google.maps.DirectionsRenderer();
-    var lat, lng;
-    navigator.geolocation.getCurrentPosition(function (location) {
-        lat = location.coords.latitude;
-        lng = location.coords.longitude;
-    });
+    // var lat, lng;
+    // navigator.geolocation.getCurrentPosition(function (location) {
+    //     lat = location.coords.latitude;
+    //     lng = location.coords.longitude;
+    // });
 
     // location of it sligo
     startingLocation = endLocation = new google.maps.LatLng(54.2785534, -8.4622789);
@@ -208,6 +220,7 @@ function calculateAndDisplayRoute() {
         travelMode: google.maps.TravelMode.DRIVING
     }, function (response, status) {
         if (status == google.maps.DirectionsStatus.OK) {
+            directionsResult = response;
             directionsDisplay.setDirections(response);
         } else {
             window.alert('Directions request failed due to ' + status);
@@ -220,6 +233,26 @@ function addWayPoint() {
         waypts.push({location: l, stopover: true});
         ordinatesList.shift();
         calculateAndDisplayRoute();
+
+        var totalDistance = 0;
+        var totalDuration = 0;
+        var legs = directionsResult.routes[0].legs;
+        for(var i=0; i<legs.length; ++i) {
+            totalDistance += (legs[i].distance.value) / 1000;
+            totalDuration += legs[i].duration.value;
+        }
+        document.getElementById("distance").innerHTML = "Total Distance:" + Math.round(totalDistance * 100) / 100 + "km (approx)";
+        document.getElementById("duration").innerHTML = "Total Time: (hh:mm) " + convertSecondsToTime(totalDuration);
+
+
         setTimeout(addWayPoint, 1000);
+    }
+
+    function convertSecondsToTime(totalSec){
+        var hours = parseInt( totalSec / 3600 ) % 24;
+        var minutes = parseInt( totalSec / 60 ) % 60;
+        var seconds = totalSec % 60;
+
+        return (hours < 10 ? "0" + hours : hours) + ":" + (minutes < 10 ? "0" + minutes : minutes);
     }
 }
