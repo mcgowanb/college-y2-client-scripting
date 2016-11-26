@@ -3,36 +3,22 @@ var imageCounter = 1;
 
 var directionsService, directionsDisplay, directionsResult, map, waypts = [], startingLocation, endLocation, infoWindow;
 
-// var ordinatesList = [
-//     new LatLng(54.2121, -8.5090),
-//     new LatLng(54.2495, -8.8799),
-//     new LatLng(54.1149, -9.1551),
-//     new LatLng(54.1446, -9.7429),
-//     new LatLng(53.9062, -9.7814),
-//     new LatLng(53.8021, -9.5143),
-//     new LatLng(53.4891, -10.0202),
-//     new LatLng(53.2707, -9.0568),
-//     new LatLng(53.4239, -7.9407),
-//     new LatLng(53.5259, -7.3381)
-// ];
-
 var ordinatesList = [
-    new LatLng(40.7829, -73.9654),
-    new LatLng(54.2495, -8.8799),
-    new LatLng(54.1149, -9.1551),
-    new LatLng(54.1446, -9.7429),
-    new LatLng(53.9062, -9.7814),
-    new LatLng(53.8021, -9.5143),
-    new LatLng(53.4891, -10.0202),
-    new LatLng(53.2707, -9.0568),
-    new LatLng(53.4239, -7.9407),
-    new LatLng(53.5259, -7.3381)
+    new LatLng(40.7484, -73.9857, "Empire State Building", "The Empire State Building is a 102-story skyscraper located on Fifth Avenue between West 33rd and 34th Streets in Midtown, Manhattan, New York City. <a href='https://en.wikipedia.org/wiki/Empire_State_Building' target='_blank'> Wikipedia</a>"),
+    new LatLng(40.7527, -73.9772, "Grand Central Terminal", "Grand Central Terminal is a commuter, rapid transit railroad terminal at 42nd Street and Park Avenue in Midtown Manhattan in New York City, United States. <a href='https://en.wikipedia.org/wiki/Grand_Central_Terminal' target='_blank'> Wikipedia</a>"),
+    new LatLng(40.7116, -74.0132, "World Trade Center Memorial", "The National September 11 Memorial & Museum are the principal memorial and museum, respectively. They commemorate the September 11, 2001 attacks, which killed 2,977 victims, and the World Trade Center bombing of 1993, which killed six. <a href='https://en.wikipedia.org/wiki/National_September_11_Memorial_%26_Museum' target='_blank'> Wikipedia</a>"),
+    new LatLng(40.7587, -73.9787, "The RockeFeller Center", "Rockefeller Center is a large complex consisting of 19 highrise commercial buildings covering 22 acres between 48th and 51st Streets in New York City. <a href='https://en.wikipedia.org/wiki/Rockefeller_Center' target='_blank'> Wikipedia</a>"),
+    new LatLng(40.7831, -73.9592, "Solomon Guggenheim Museum", "The Solomon R. Guggenheim Museum, often referred to as The Guggenheim, is an art museum located at 1071 Fifth Avenue on the corner of East 89th Street in the Upper East Side neighborhood of Manhattan, New York City <a href='https://en.wikipedia.org/wiki/Solomon_R._Guggenheim_Museum' target='_blank'> Wikipedia</a>"),
+    new LatLng(40.7599, -73.9803, "Radio City Music Hall", "Radio City Music Hall is an entertainment venue located in Rockefeller Center in New York City. Its nickname is the Showplace of the Nation, and it was for a time the leading tourist destination in the city. <a href='https://en.wikipedia.org/wiki/Radio_City_Music_Hall' target='_blank'> Wikipedia</a>"),
+    new LatLng(40.7644, -73.9993, "Intrepid Sea Air & Space Museum", "The Intrepid Sea, Air & Space Museum is an American military and maritime history museum with a collection of museum ships in New York City. It is located at Pier 86 at 46th Street in the Hell's Kitchen neighborhood on the West Side of Manhattan. <a href='https://en.wikipedia.org/wiki/Intrepid_Sea,_Air_%26_Space_Museum' target='_blank'> Wikipedia</a>")
 ];
 
 //lat lng object
-function LatLng(lat, lng) {
+function LatLng(lat, lng, name, details) {
     this.lat = lat;
     this.lng = lng;
+    this.name = name;
+    this.details = details
 }
 
 function initListeners() {
@@ -146,10 +132,6 @@ function partB() {
     document.getElementById("part-a").className = "";
     document.getElementById("part-b").className = "current";
     fadeOut("main");
-    createPartBContent();
-}
-
-function createPartBContent() {
     generateMainBodyContent();
     createMap();
 }
@@ -167,7 +149,7 @@ function generateMainBodyContent() {
     btn.setAttribute("style", "float:right");
     btn.innerHTML = "Beginulate";
 
-    headerCol.innerHTML = "<h3 style='font-family:Bevan, cursive'>Welcome to the map planner. We have pre planned a route for you today. Please click the button to see where you're off to.....</h3>";
+    headerCol.innerHTML = "<h3 style='font-family:Bevan, cursive'>Welcome to the map planner. We have pre planned a route for you to see some sights. Please click the button to see where you're off to.....</h3>";
     headerCol.appendChild(btn);
     headerRow.appendChild(headerCol);
 
@@ -203,54 +185,23 @@ function generateMainBodyContent() {
 
     document.getElementById("add-route").addEventListener("click", startRoute, false);
 }
+
+//initialise the map on the page
 function createMap() {
     map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 10,
-        mapTypeId: google.maps.MapTypeId.HYBRID,
-        center: {lat: 54.2785534, lng: -8.4622789}
+        zoom: 13,
+        mapTypeId: google.maps.MapTypeId.MAP,
+        center: {lat: 40.7624, lng: -73.9738}
     });
-    //add marker
-    new google.maps.Marker({
-        position: getCurrentLocation(),
-        map: map,
-        title: 'You are Here'
-    });
+    //trump tower
+    startingLocation = endLocation = new google.maps.LatLng(40.7624, -73.9738);
 
     //adding direction service to the map
     directionsService = new google.maps.DirectionsService();
     directionsDisplay = new google.maps.DirectionsRenderer();
     directionsDisplay.setMap(map);
     directionsDisplay.setPanel(document.getElementById('directions'));
-    //add panel for directions
-
     infoWindow = new google.maps.InfoWindow({map: map});
-}
-
-function getCurrentLocation() {
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(function (position) {
-            var pos = {
-                lat: position.coords.latitude,
-                lng: position.coords.longitude
-            };
-            startingLocation = endLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-            infoWindow.setPosition(pos);
-            infoWindow.setContent('You are here');
-            map.setCenter(pos);
-        }, function () {
-            handleLocationError(true, infoWindow, map.getCenter());
-        });
-    } else {
-        // Browser doesn't support Geolocation
-        handleLocationError(false, infoWindow, map.getCenter());
-    }
-}
-function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-    startingLocation = endLocation = new google.maps.LatLng(54.2785534, -8.4622789);
-    infoWindow.setPosition(pos);
-    infoWindow.setContent(browserHasGeolocation ?
-        'Error: The Geolocation service failed, using ITSligo as Co-ordinates' :
-        'Error: Your browser doesn\'t support geolocation.');
 }
 
 function startRoute() {
@@ -264,6 +215,7 @@ function updateRoute() {
         origin: startingLocation,
         destination: endLocation,
         waypoints: waypts,
+        optimizeWaypoints: true,
         travelMode: google.maps.TravelMode.DRIVING
     }, function (response, status) {
         if (status == google.maps.DirectionsStatus.OK) {
@@ -277,7 +229,19 @@ function updateRoute() {
 function addWayPoint() {
     if (ordinatesList.length > 0) {
         var l = new google.maps.LatLng(ordinatesList[0].lat, ordinatesList[0].lng);
-        waypts.push({location: l, stopover: false});
+        var marker = createMarker(l, ordinatesList[0].name, "http://www.google.com/mapfiles/arrow.png");
+        marker.addListener('click', function () {
+            infowindow.open(map, marker);
+        });
+        var infowindow = new google.maps.InfoWindow({
+            content: ordinatesList[0].details
+        });
+        waypts.push(
+            {
+                location: l,
+                stopover: false
+            }
+        );
         ordinatesList.shift();
         updateRoute();
 
@@ -285,7 +249,6 @@ function addWayPoint() {
         var totalDuration = 0;
         if (directionsResult != null) {
             var legs = directionsResult.routes[0].legs;
-            console.log(directionsResult.routes[0].legs);
             for (var i = 0; i < legs.length; ++i) {
                 totalDistance += (legs[0].distance.value) / 1000;
                 totalDuration += legs[0].duration.value;
@@ -301,4 +264,13 @@ function addWayPoint() {
         var m = parseInt(seconds / 60) % 60;
         return (h < 10 ? "0" + h : h) + " hours " + (m < 10 ? "0" + m : m) + " minutes";
     }
+}
+
+function createMarker(latLng, label, url) {
+    return new google.maps.Marker({
+        position: latLng,
+        map: map,
+        icon: url,
+        title: label
+    });
 }
