@@ -1,7 +1,7 @@
 initListeners();
 var imageCounter = 1;
 
-var directionsService, directionsDisplay, directionsResult, map, waypts = [], startingLocation, endLocation, infoWindow;
+var directionsService, directionsDisplay, directionsResult, map, waypts = [], startingLocation, endLocation, infoWindow, twitterDIV;
 
 var ordinatesList = [
     new LatLng(40.7484, -73.9857, "Empire State Building", "The Empire State Building is a 102-story skyscraper located on Fifth Avenue between West 33rd and 34th Streets in Midtown, Manhattan, New York City. <a href='https://en.wikipedia.org/wiki/Empire_State_Building' target='_blank'> Wikipedia</a>"),
@@ -158,11 +158,11 @@ function generateMainBodyContent() {
     resultRow.setAttribute("style", "margin-top: 20px");
 
     var durationCol = document.createElement("div");
-    durationCol.setAttribute("class", "col-xs-8 col-xs-offset-2");
+    durationCol.setAttribute("class", "col-xs-4 col-xs-offset-2");
     durationCol.setAttribute("id", "duration");
 
     var distanceCol = document.createElement("div");
-    distanceCol.setAttribute("class", "col-xs-8 col-xs-offset-2");
+    distanceCol.setAttribute("class", "col-xs-4");
     distanceCol.setAttribute("id", "distance");
 
     resultRow.appendChild(durationCol);
@@ -172,17 +172,24 @@ function generateMainBodyContent() {
     mapRow.setAttribute("class", "row");
 
     var mapDiv = document.createElement("div");
-    mapDiv.setAttribute("class", "col-xs-8 col-xs-offset-1");
+    mapDiv.setAttribute("class", "col-xs-8 col-xs-offset-2");
     mapDiv.setAttribute("id", "map");
 
     var directionsDiv = document.createElement("div");
-    directionsDiv.setAttribute("class", "col-xs-2");
+    directionsDiv.setAttribute("class", "col-xs-4 col-xs-offset-2");
     directionsDiv.setAttribute("id", "directions");
 
     mapRow.appendChild(mapDiv);
     mapRow.appendChild(directionsDiv);
-    document.getElementById("body").appendChild(headerRow).appendChild(resultRow).appendChild(mapRow);
 
+    var twitterDiv = document.createElement("div");
+    twitterDiv.setAttribute("class", "col-xs-4");
+    twitterDiv.setAttribute("id", "twitter-div");
+
+    twitterDiv.innerHTML = '<a class="twitter-timeline" id="ttl" href="https://twitter.com/hashtag/NewYork" data-widget-id="804043428619288576">#NewYorkTweets</a>';
+    mapRow.appendChild(twitterDiv);
+
+    document.getElementById("body").appendChild(headerRow).appendChild(resultRow).appendChild(mapRow);
     document.getElementById("add-route").addEventListener("click", startRoute, false);
 }
 
@@ -205,6 +212,7 @@ function createMap() {
 }
 
 function startRoute() {
+    twttr.widgets.load();
     updateRoute();
     addWayPoint();
 }
@@ -258,12 +266,12 @@ function addWayPoint() {
         }
         setTimeout(addWayPoint, 1000);
     }
+}
 
-    function convertSecondsToTime(seconds) {
-        var h = parseInt(seconds / 3600) % 24;
-        var m = parseInt(seconds / 60) % 60;
-        return (h < 10 ? "0" + h : h) + " hours " + (m < 10 ? "0" + m : m) + " minutes";
-    }
+function convertSecondsToTime(seconds) {
+    var h = parseInt(seconds / 3600) % 24;
+    var m = parseInt(seconds / 60) % 60;
+    return h + " hours " + (m < 10 ? "0" + m : m) + " minutes";
 }
 
 function createMarker(latLng, label, url) {

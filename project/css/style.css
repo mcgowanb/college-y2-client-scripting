@@ -460,11 +460,12 @@ footer a:hover {
     padding-left: 0;
 }
 #directions{
-    height: 500px;
-    overflow-y: scroll;
+    max-height: 500px;
+    overflow-y: auto;
 }
 .summary{
-    /*font-weight: 500;*/
     font-family:Bevan, cursive;
-    /*float: right;*/
+}
+#ttl {
+    display: none;
 }
