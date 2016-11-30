@@ -18,13 +18,13 @@ function LatLng(lat, lng, name, details) {
     this.lat = lat;
     this.lng = lng;
     this.name = name;
-    this.details = details
+    this.details = details;
 }
 
 function initListeners() {
-    document.getElementById('part-a').addEventListener("click", partA, false);
-    document.getElementById('part-b').addEventListener("click", partB, false);
-    document.getElementById('reset').addEventListener("click", reloadPage, false);
+    document.getElementById("part-a").addEventListener("click", partA, false);
+    document.getElementById("part-b").addEventListener("click", partB, false);
+    document.getElementById("reset").addEventListener("click", reloadPage, false);
 }
 
 function reloadPage() {
@@ -73,9 +73,9 @@ function changeButtonStyles() {
     }
 
     var menuButtons = document.querySelectorAll("#nav li a");
-    for (var i = 0; i < menuButtons.length; i++) {
-        menuButtons[i].style.fontFamily = "Bevan,cursive";
-        menuButtons[i].style.paddingTop = "7px";
+    for (var x = 0; x < menuButtons.length; x++) {
+        menuButtons[x].style.fontFamily = "Bevan,cursive";
+        menuButtons[x].style.paddingTop = "7px";
     }
 }
 function changeFontType() {
@@ -88,7 +88,7 @@ function changeFontTypeForElements(item) {
     for (var i = 0; i < headers.length; i++) {
         headers[i].style.fontFamily = "Bevan,cursive";
         if (item == "h3") {
-            headers[i].setAttribute("style", "text-shadow: 11px 6px 5px rgba(0, 0, 0, 1); font-family:Bevan, cursive")
+            headers[i].setAttribute("style", "text-shadow: 11px 6px 5px rgba(0, 0, 0, 1); font-family:Bevan, cursive");
         }
     }
 }
@@ -158,11 +158,11 @@ function generateMainBodyContent() {
     resultRow.setAttribute("style", "margin-top: 20px");
 
     var durationCol = document.createElement("div");
-    durationCol.setAttribute("class", "col-xs-4 col-xs-offset-2");
+    durationCol.setAttribute("class", "col-xs-8 col-xs-offset-2");
     durationCol.setAttribute("id", "duration");
 
     var distanceCol = document.createElement("div");
-    distanceCol.setAttribute("class", "col-xs-4");
+    distanceCol.setAttribute("class", "col-xs-8 col-xs-offset-2");
     distanceCol.setAttribute("id", "distance");
 
     resultRow.appendChild(durationCol);
@@ -172,11 +172,11 @@ function generateMainBodyContent() {
     mapRow.setAttribute("class", "row");
 
     var mapDiv = document.createElement("div");
-    mapDiv.setAttribute("class", "col-xs-4 col-xs-offset-2");
+    mapDiv.setAttribute("class", "col-xs-8 col-xs-offset-1");
     mapDiv.setAttribute("id", "map");
 
     var directionsDiv = document.createElement("div");
-    directionsDiv.setAttribute("class", "col-xs-4");
+    directionsDiv.setAttribute("class", "col-xs-2");
     directionsDiv.setAttribute("id", "directions");
 
     mapRow.appendChild(mapDiv);
@@ -188,19 +188,19 @@ function generateMainBodyContent() {
 
 //initialise the map on the page
 function createMap() {
-    map = new google.maps.Map(document.getElementById('map'), {
+    map = new google.maps.Map(document.getElementById("map"), {
         zoom: 13,
         mapTypeId: google.maps.MapTypeId.MAP,
         center: {lat: 40.7624, lng: -73.9738}
     });
     //trump tower
-    startingLocation = endLocation = new google.maps.LatLng(40.7624, -73.9738);
+    startingLocation = endLocation = new google.maps.LatLng(40.7625, -73.9738);
 
     //adding direction service to the map
     directionsService = new google.maps.DirectionsService();
     directionsDisplay = new google.maps.DirectionsRenderer();
     directionsDisplay.setMap(map);
-    directionsDisplay.setPanel(document.getElementById('directions'));
+    directionsDisplay.setPanel(document.getElementById("directions"));
     infoWindow = new google.maps.InfoWindow({map: map});
 }
 
@@ -222,7 +222,7 @@ function updateRoute() {
             directionsResult = response;
             directionsDisplay.setDirections(response);
         } else {
-            window.alert('Directions request failed due to ' + status);
+            window.alert("Directions request failed due to " + status);
         }
     });
 }
@@ -230,7 +230,7 @@ function addWayPoint() {
     if (ordinatesList.length > 0) {
         var l = new google.maps.LatLng(ordinatesList[0].lat, ordinatesList[0].lng);
         var marker = createMarker(l, ordinatesList[0].name, "http://www.google.com/mapfiles/arrow.png");
-        marker.addListener('click', function () {
+        marker.addListener("click", function () {
             infowindow.open(map, marker);
         });
         var infowindow = new google.maps.InfoWindow({

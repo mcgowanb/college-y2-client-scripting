@@ -450,8 +450,7 @@ footer a:hover {
 }
 
 #map, #directions{
-    margin-top: 50px;
-
+    margin-top: 10px;
 }
 
 #map {
@@ -465,7 +464,7 @@ footer a:hover {
     overflow-y: scroll;
 }
 .summary{
-    font-weight: 500;
+    /*font-weight: 500;*/
     font-family:Bevan, cursive;
-    float: right;
+    /*float: right;*/
 }
