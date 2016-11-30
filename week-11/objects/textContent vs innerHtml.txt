@@ -1,0 +1,6 @@
+innerHTML allows content including html elements and nodes to be inserted into a dom.
+This is a security issue in this as it would allow users to insert malicious scripts into the html page that can be called
+and run, much like a CSRF attack.
+
+textContent inserts content into the html page as text only, so if html tags are used in the content to be inserted
+it will be inserted only as text.
