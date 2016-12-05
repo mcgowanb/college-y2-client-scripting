@@ -94,6 +94,7 @@ function changeFontTypeForElements(item) {
 }
 
 function changeSliderImages() {
+
     var img = document.getElementById("slider");
     img.style.opacity = '0.0';
     img.style.borderRadius = "0";
