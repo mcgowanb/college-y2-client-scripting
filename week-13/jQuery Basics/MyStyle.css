@@ -1,0 +1,22 @@
+@charset "utf-8";
+/* CSS Document */
+#useid{
+	width:200px;
+	height:200px;
+	background-color:#283fc5;
+}
+
+.basic{
+	width:1000px;
+	height:300px;
+	background-color:#a81517;
+	text-align:inherit;
+}
+
+div{
+	opacity:.6;
+	color:#f5f406;
+	font-size:42px;
+	margin-top:10px;
+}
+
