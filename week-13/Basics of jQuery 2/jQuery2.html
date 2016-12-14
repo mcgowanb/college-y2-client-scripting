@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("p").click(function () {
+                $("p").html("text has changed");
+            });
+            $("#p2").on("click", function () {
+                $(this).css({"font-size": "22px", "color": "red", "background-color": "blue"});
+            });
+            $(".p3").click(function () {
+                $(this).toggle("slow");
+                $(this).toggle("slow");
+            });
+        });
+    </script>
+</head>
+<body>
+
+<p>If you click on me, I will change.</p>
+<p id="p2">Click me to change</p>
+<p class="p3">Click me to toggle</p>
+
+</body>
+</html>
