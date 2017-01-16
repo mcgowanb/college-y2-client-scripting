@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body onload="insertList()">
+
+</body>
+<script>
+    function insertList(){
+
+        var elem = document.createElement("select");
+        for(var i = 1; i <= 10; i++){
+            var s = document.createElement("option");
+            s.style.background = randomColour();
+            var t = document.createTextNode(i);
+            s.appendChild(t);
+            elem.appendChild(s);
+        }
+
+        document.body.appendChild(elem);
+    }
+
+    function randomColour() {
+        //generate random hex colour
+        var newColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
+        return newColor;
+    }
+</script>
+</html>
